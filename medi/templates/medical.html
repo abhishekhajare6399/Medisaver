@@ -1,0 +1,109 @@
+{% extends 'index.html' %}
+{% block content%}
+
+
+
+
+{% for product1 in products1 %}
+<div  class="text-center alert alert-warning">
+    <div class="row">
+        <div class="col-md-2">
+            <img src="{{ MEDIA_URL }}{{ product1.store_image.url }}" class="card-img-top" alt="{{product1.medical_name }}" style="width:80%;height:80;padding:6px;display:flex;">
+        </div>
+        <div class="col-md-8">
+<h4>{{ product1.medical_name }}</h4>
+<p style="font-family:Serif;color:black;text-align:center;font-size:15px">Mobile : {{ product1.mobile }}  |   Email : {{ product1.email }}  |  Address : {{ product1.address }}    |  Discount : {{ product1.discount }}%</p>
+        </div><div class="col-md-1">
+{% if product1.status == 'Close' %}
+<p class="card-title" style="background-color:grey;padding:2px;color:black;">Closed.</p>
+{% endif %}
+</div> 
+{% if product1.role == 'MS' %}
+<a href ="{% url 'checkout' product1.sid %}"><button class="btn btn-outline-success my-2 my-sm-0" type="submit" style="float: right;">Checkout</button></a>
+{% endif %}
+</div>
+</div>
+<p class = "divider-text"></p>
+
+
+
+<div class="row" style="padding:10px;">
+{% for product in products %}
+{% if product1.role == 'MS' %}
+     <div class="col-md-3">
+      <div class="card">
+       <img src="{{ MEDIA_URL }}{{ product.medicine_image.url }}" class="card-img-top" alt="{{product.medicine }}" style="width:305;height:200;padding:6px;display:flex;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.medicine }}</h5>
+          <div class="row">
+            <div class="col-md-6">
+            <p style="font-family:Serif;color:black;text-align:left;font-size:17px">Price : {{ product.price }} Rs.</p>
+              </div>
+              <div class="col-md-6">
+                <p style="font-family:Serif;color:black;text-align:left;font-size:17px">Discount : {{ product.discount }}%.</p>
+              </div>
+            </div>
+        
+          <form action ="{% url 'insertmedicine' %}" method ="post">
+            {% csrf_token %}
+            <input type="hidden" name="medicine" value="{{ product.medicine }}">
+            <input type="hidden" name="mid" value="{{ product.mid }}">
+            <input type="hidden" name="sid" value="{{ product1.sid }}">
+            <input type="hidden" name="price" value="{{ product.price }}">
+            <input type="hidden" name="discount" value="{{ product.discount }}">
+            <div class="row">
+            <div class="col-sm-1" style="padding:8px;">
+                  <button class="btn btn-outline-danger" type="submit" name="submit1"><i class="fa fa-minus" aria-hidden="true"></i></button>
+                  </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <div class="col-sm-7" style="padding:5px;">
+                  <input class="form-control me-2"  type="number" id="quantity" name="quantity" min="0" max="100" value="0" aria-label="Search" required>
+                  </div>
+                  <div class="col-sm-1" style="padding:8px;">
+                  <button class="btn btn-outline-danger" type="submit" name="submit2"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                  </div>
+                  </div>
+                </form>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+
+<div class="row" style="padding:10px;">
+    {% for product2 in products2 %}
+    {% if product1.role == 'HS'%}
+        <div class="col-md-3">
+          <div class="card">
+            <img src="{{ MEDIA_URL }}{{ product2.image.url }}" class="card-img-top" alt="{{product2.medicine }}" style="width:308;height:200;padding:6px;display:flex;">
+            <div class="card-body">
+             <h5 class="card-title">{{ product2.name }}</h5>
+             <a href ="{% url 'appointment' product2.sid product2.mid %}"><button class="btn btn-outline-primary" type="submit" style="float: center;">Book Appointment</button></a>
+            </div>
+          </div>
+        </div>
+        {% elif product1.role == 'LS'%}
+          <div class="col-md-3">
+            <div class="card">
+              <img src="{{ MEDIA_URL }}{{ product2.image.url }}" class="card-img-top" alt="{{product2.medicine }}" style="width:308;height:200;padding:6px;display:flex;">
+              <div class="card-body">
+                <h5 class="card-title">{{ product2.name }}</h5>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <p style="font-family:Serif;color:black;text-align:left;font-size:17px">Fess : {{ product2.price }} Rs.</p>
+                    </div>
+                    <div class="col-md-6">
+                      <p style="font-family:Serif;color:black;text-align:left;font-size:17px">Discount : {{ product2.discount }}%.</p>
+                    </div>
+                    <a href ="{% url 'appointment' product2.sid product2.mid %}"><button class="btn btn-outline-primary my-2 my-sm-0" type="submit" style="float: right;">Book Appointment</button></a>
+                  </div>
+              </div>
+            </div>
+          </div>
+    {% endif %}
+  {% endfor %}
+</div>
+  {% endfor %}
+  
+  {% endblock content %}

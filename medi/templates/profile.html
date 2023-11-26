@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block content%}
+{%load static%}
+
+{% for product in products %}
+<div class="row">
+    <div class="col-sm-8" style="padding:15px;">
+        <h4>Profile :</h4>
+        </div>
+        <div class="col-sm-2" style="padding:5px;">
+        <button class="btn btn-outline-warning" name="submit" type="submit">Edit Profile</button>
+    </div>
+     </div>
+     <div class="row">
+        <div class="col-sm-8" style="padding:25px;">
+    <div class="row">
+    <div class="form-group col-sm-12">
+          <label for="inputEmail4">Name :</label>
+          <input type="name" class="form-control" id="inputname4" name="name1" value="{{ product.name }}" placeholder="" >
+        </div>
+      </div>
+    <div class="row">
+        <div class="form-group col-sm-4">
+          <label for="inputEmail4">Email :</label>
+          <input type="email" class="form-control" id="inputEmail4" name="email1" placeholder="" value="{{ product.email }}" >
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="inputPassword4">Mobile Number :</label>
+          <input type="mobile" class="form-control" id="inputmobile4" name="mobile1" placeholder="" value="{{ product.mobile }}"  >
+        </div>
+        <div class="form-group col-sm-4">
+            <label for="inputPassword4">Date of Birth :</label>
+            <input type="text" class="form-control" id="inputmobile4" name="mobile1" placeholder="" value="{{ product.DOB }}" >
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="inputAddress">Address :</label>
+        <input type="text" class="form-control" id="inputAddress" name="address1" placeholder="" value="{{ product.address }}" >
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <label for="inputCity">City :</label>
+          <input type="text" class="form-control" id="inputCity" name="city1" placeholder="" value="{{ product.city }}" >
+        </div>
+        <div class="col-sm-4">
+          <label for="inputCity">State :</label>
+          <input type="text" class="form-control" id="inputCity" name="city1" placeholder="" value="{{ product.state }}" >
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Zip :</label>
+          <input type="text" class="form-control" id="inputZip" name="zip1" placeholder="" value="{{ product.zip }}" >
+        </div>
+      </div>
+      
+        </div>
+        <div class="col-sm-3" style="padding:5px;">
+        <img src="{{ MEDIA_URL }}{{ product.profile_image.url }}" alt="" width="300" height="350"> 
+    </div>
+     </div>
+     {% endfor %}
+
+     {% endblock content%}

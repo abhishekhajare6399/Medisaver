@@ -1,0 +1,156 @@
+{% extends 'index.html' %}
+{%load static%}
+{% block content%}
+   {% for product1 in products1  %}
+   
+   <div  class="text-center alert alert-success">
+    <div class="row">
+        <div class="col-md-2">
+            <img src="{{ MEDIA_URL }}{{ product1.store_image.url }}" class="card-img-top" alt="{{product1.medical_name }}" style="width:90%;height:90;padding:6px;display:flex;">
+        </div>
+        <div class="col-md-9">
+<h4>{{ product1.medical_name }}  || Appointment Booking</h4>
+<p style="font-family:Serif;color:black;text-align:center;font-size:15px">Mobile : {{ product1.mobile }}  |   Email : {{ product1.email }}  |  Address : {{ product1.address }}    |  Discount : {{ product1.discount }}%</p>
+<p style="font-family:Serif;color:black;text-align:center;font-size:20px">{{ dname }}</p>
+        </div></div>
+</div>
+
+{% for product in products %}
+
+{% if product1.role == 'HS' %}
+<form action="{% url 'appointment1' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="name" value="{{ dname }}">
+    <input type="hidden" name="mid" value="{{ product.mid }}">
+    <input type="hidden" name="sid" value="{{ product.sid }}">
+    <input type="hidden" name="price" value="{{ product.price }}">
+    <input type="hidden" name="discount" value="{{ product.discount }}">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputname4">Patient Name :</label>
+        <input type="name" class="form-control" name="pname" id="inputname4" placeholder="Full Name" required>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputname4">Visiting Date :</label>
+        <input type="date" class="form-control" name="date" id="inputdate" placeholder="" required>
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3"></div>
+        <div class="form-group col-md-2">
+          <label for="inputCity">Age :</label>
+          <input type="number" class="form-control" id="inputage" placeholder="26" name="age" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputState">Gender :</label>
+          <select id="inputState" name="gender" class="form-control" required>
+            <option selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Occupation :</label>
+          <input type="text" class="form-control" name ="occupation" placeholder="e.g Student" id="inputoccupation" required>
+        </div>
+      </div>
+    <div class="form-group">
+        <div class="form-row">
+            <div class="form-group col-md-3"></div>
+            <div class="form-group col-md-6">
+      <label for="inputAddress2">Disease :</label>
+      <input type="textare" class="form-control" id="inputAddress2" name="disease" placeholder="Describe the the problem that u are facing" required>
+    </div></div></div>
+    <div class="form-group">
+        <div class="form-row">
+            <div class="form-group col-md-3"></div>
+            <div class="form-group col-md-6">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck" required>
+        <label class="form-check-label" for="gridCheck">
+         Confirm Book Appointment
+        </label>
+      </div>
+    </div></div></div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div></div>
+  </form>
+{% else %}
+
+<form action="{% url 'appointment2' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="name" value="{{ dname }}">
+    <input type="hidden" name="mid" value="{{ product.mid }}">
+    <input type="hidden" name="sid" value="{{ product.sid }}">
+    <input type="hidden" name="price" value="{{ product.price }}">
+    <input type="hidden" name="discount" value="{{ product.discount }}">
+    <input type="hidden" name="discount1" value="{{ product1.discount }}">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="inputname4">Patient Name :</label>
+        <input type="name" class="form-control" name="pname" id="inputname4" placeholder="Full Name" required>
+      </div>
+      <div class="form-group col-md-2">
+        <label for="inputname4">Visiting Date :</label>
+        <input type="date" class="form-control" name="date" id="inputdate" placeholder="" required>
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3"></div>
+        <div class="form-group col-md-2">
+          <label for="inputCity">Age :</label>
+          <input type="number" class="form-control" id="inputage" placeholder="26" name="age" required>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputState">Gender :</label>
+          <select id="inputState" name="gender" class="form-control" required>
+            <option selected>Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group col-md-2">
+          <label for="inputZip">Occupation :</label>
+          <input type="text" class="form-control" name ="occupation" placeholder="e.g Student" id="inputoccupation" required>
+        </div>
+      </div>
+    <div class="form-group">
+        <div class="form-row">
+            <div class="form-group col-md-3"></div>
+            <div class="form-group col-md-6">
+      <label for="inputAddress2">Disease :</label>
+      <input type="textare" class="form-control" id="inputAddress2" name="disease" placeholder="Describe the the problem that u are facing" required>
+    </div></div></div>
+    <div class="form-group">
+        <div class="form-row">
+            <div class="form-group col-md-3"></div>
+            <div class="form-group col-md-6">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck" required>
+        <label class="form-check-label" for="gridCheck">
+         Confirm Book Appointment
+        </label>
+      </div>
+    </div></div></div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</div></div>
+  </form>
+
+{% endif %}
+{% endfor %}
+
+{% endfor %}
+
+{% endblock content%}

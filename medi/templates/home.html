@@ -1,0 +1,77 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="register-container">
+  <div class="register-left">
+      <h1 class="register-heading">Register as Company</h1>
+      <p>Start posting jobs and provide opportunities.</p>
+      <a href="{% url 'company_reg' %}" class="register-button">Continue as Comapny</a>
+      <br><br>
+      <p>Already registered? <a  style="color: black;" href="{% url 'company_reg' %}">Log in</a></p>
+  </div>
+  <div class="register-right">
+      <h1 class="register-heading">Register as User</h1>
+      <p>Provide Resumes and get candidates hired</p>
+      <a href="{% url 'company_reg' %}" class="register-button">Continue as User</a>
+      <br><br>
+      <p>Already registered? <a href="{% url 'company_reg' %}">Log in</a></p>
+  </div>
+</div>
+
+
+<div class="contact_section" id="about">
+<div class="row" style="padding:20px;">
+    <div class="col-md-4">
+        <img src="{% static 'images/about-img.png'%}" alt="">
+      </div>
+    <div class="col-md-8">
+        <h2 style="font-size: 35px;color: black;">
+          About Our Pets
+          <span>
+            Clinic
+          </span>
+        </h2>
+        <p>
+        Welcome to petscorp.in, a place where pet lovers come together to share their passion for animals and connect with others who share their interests. Our platform is designed to provide a fun and interactive environment where you can find information about the nearest pet stores, vets, salons, boardings or any other service provider, share stories of your own furry friends, and connect with other pet parents nationwide. Whether you're a dog lover, a cat person, or have a fondness for more exotic creatures, our platform has something for everyone. So come join our community and let's celebrate the joy of pets together!
+
+We started this platform after seeing the serious issue of pet abandonment, which affects countless animals around the world. Every year, thousands of pets are left on the streets or surrendered to shelters, where they may face uncertain futures or even euthanasia. Being pet parents ourselves, we understand the innocent bond between a pet and the parent (not owner but a parent) and how heartless and cruel it is for someone to abandon their pet as they aren’t disposable objects, but living beings that rely on us for their wellbeing.
+
+If you have made the commitment to care for a pet, it's important to honour that commitment and do everything in your power to ensure their happiness and safety. So we are here to empower you with everything you need to make your journey a comfortable and rewarding one.
+        </p>
+        </div>
+    </div>
+  </div>
+       
+
+         <!-- contact section start -->
+         <div class="contact_section" id="contact">
+            <div class="container">
+               <div class="contact_section_2">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <h1 class="contact_taital">Get In Touch</h1>
+                        <form action="">
+                           <div class="mail_section_1">
+                              <input type="text" class="mail_text" placeholder="Name" name="Name">
+                              <input type="text" class="mail_text" placeholder="Phone Number" name="Phone Number"> 
+                              <input type="text" class="mail_text" placeholder="Email" name="Email">
+                              <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
+                              <div class="send_bt"><a href="#">SEND</a></div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- contact section end -->
+  
+  
+
+{% endblock content %}

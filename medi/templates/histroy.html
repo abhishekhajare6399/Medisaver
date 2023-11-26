@@ -1,0 +1,145 @@
+{% extends 'index.html' %}
+{%load static%}
+{% block content%}
+<p class = "divider-text"></p>
+<div class="row" style="padding:10px;">
+    {% for product1 in products1 %}
+    {% if product1.role == 'MS' %}
+    <div class="col-md-8">
+      <div class="text-center alert alert-warning">
+        <h5 style="color:black;text-align:center">{{product1.medical_name}}</h5>
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">Address : {{product1.address}}   |  Mobile : {{product1.mobile}}   |   Email : {{product1.email}}</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-3" style="padding:px;">
+          <p style="font-family:Serif;color:black;text-align:center;font-size:18px">Medicine Name :</p>
+      </div>
+      <div class="col-sm-2" style="padding:5px;">
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">Medicine Price :</p>
+      </div>
+      <div class="col-sm-3" style="padding:5px;">
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">Medicine Quantity :</p>
+      </div>
+      <div class="col-sm-1" style="padding:5px;">
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">Total : </p>
+      </div>
+      <div class="col-sm-3" style="padding:5px;">
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">After Discount Total : </p>
+      </div>
+    </div>
+    <p class = "divider-text"></p>
+      {% for product in products %}
+
+      <div class="row">
+        <div class="col-sm-3" style="padding:px;">
+          <p style="font-family:Serif;color:black;text-align:center;font-size:18px">{{product.medicine}}</p>
+      </div>
+      <div class="col-sm-2" style="padding:5px;">
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">{{product.price}}</</p>
+      </div>
+      <div class="col-sm-3" style="padding:5px;">
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">{{product.quantity}}</p>
+      </div>
+      <div class="col-sm-1" style="padding:5px;">
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">{{product.total}}</p>
+      </div>
+      <div class="col-sm-3" style="padding:5px;">
+        <p style="font-family:Serif;color:black;text-align:center;font-size:18px">{{product.Final_total}}</p>
+      </div>
+    </div>
+
+
+      {% endfor %}
+      <p class = "divider-text"></p>
+      <div class="row">
+        <div class="col-sm-6" style="padding:px;">
+      <p style="font-family:Serif;color:black;text-align:Left;font-size:22px">Total : </p>
+      <p style="font-family:Serif;color:black;text-align:left;font-size:22px">After {{product1.discount}}% Discount Total : </p>
+        </div><div class="col-sm-6" style="padding:px;">
+          <p style="font-family:Serif;color:black;text-align:right;font-size:22px">Rs.</p>
+          <p style="font-family:Serif;color:black;text-align:right;font-size:22px">Rs.</p>
+    </div> </div> </div>
+    <div class="col-md-4">
+      <a href ="{% url 'medical' product1.sid %}"><img src="{{ MEDIA_URL }}{{ product1.store_image.url }}" class="card-img-top" alt="{{product1.medical_name }}" style="width:100%;height:300;padding:6px;display:flex;"></a>
+    </div>
+
+    
+      {% elif product1.role == 'HS'%}
+      {% for product in products %}
+        <div class="col-md-8">
+          <div class="text-center alert alert-warning">
+            <h5 style="color:black;text-align:center">{{product1.medical_name}}</h5>
+            <p style="font-family:Serif;color:black;text-align:center;font-size:18px">Address : {{product1.address}}   |  Mobile : {{product1.mobile}}   |   Email : {{product1.email}}</p>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Doctor Name : {{product.name}}</p>
+              <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Appointment Date : {{product.Appointment_date}}</p>
+              <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Appointment Time : {{product.Appointment_time}}</p>
+            </div>
+            <div class="col-md-6">
+              <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Patient Name : {{product.patient}}</p>
+              <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Age : {{product.age}}</p>
+              <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Disease : {{product.disease}}</p>
+            </div>
+            <div class="col-md-3">
+            </div>
+              <div class="col-md-3">
+                <h2 style="color:black;text-align:left;font-size:18px">Status : {{product.status}}</h2>
+              </div>
+              <div class="col-md-6">
+                {% if product.status == 'Completed'%}
+                <a href=""><button class="btn btn-outline-warning" type="submit">Download Report</button></a>
+                {% endif %}
+              </div>
+          </div><br><br>
+
+        </div>
+        <div class="col-md-4">
+          <a href ="{% url 'medical' product1.sid %}"><img src="{{ MEDIA_URL }}{{ product1.store_image.url }}" class="card-img-top" alt="{{product1.medical_name }}" style="width:100%;height:300;padding:6px;display:flex;"></a>
+        </div>
+        {% endfor %}
+      {% else %}
+      {% for product in products %}
+      <div class="col-md-8">
+        <div class="text-center alert alert-warning">
+          <h5 style="color:black;text-align:center">{{product1.medical_name}}</h5>
+          <p style="font-family:Serif;color:black;text-align:center;font-size:18px">Address : {{product1.address}}   |  Mobile : {{product1.mobile}}   |   Email : {{product1.email}}</p>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Test Name : {{product.name}}</p>
+            <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Appointment Date : {{product.Appointment_date}}</p>
+            <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Appointment Time : {{product.Appointment_time}}</p>
+            <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Total Bill : {{product.total}} Rs.</p>
+          </div>
+          <div class="col-md-6">
+            <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Patient Name : {{product.patient}}</p>
+            <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Age : {{product.age}}</p>
+            <p style="font-family:Serif;color:black;text-align:left;font-size:18px">Disease : {{product.disease}}</p>
+            <p style="font-family:Serif;color:black;text-align:left;font-size:18px">After discount total : {{product.Final_total}} Rs.</p>
+          </div>
+          <div class="col-md-3">
+          </div>
+            <div class="col-md-3">
+              <h2 style="color:black;text-align:left;font-size:18px">Status : {{product.status}}</h2>
+            </div>
+            <div class="col-md-6">
+              {% if product.status == 'Completed'%}
+              <a href=""><button class="btn btn-outline-warning" type="submit">Download Report</button></a>
+              {% endif %}
+            </div><br><br>
+        </div>
+  
+      </div>
+      <div class="col-md-4">
+        <a href ="{% url 'medical' product1.sid %}"><img src="{{ MEDIA_URL }}{{ product1.store_image.url }}" class="card-img-top" alt="{{product1.medical_name }}" style="width:100%;height:300;padding:6px;display:flex;"></a>
+      </div>
+      
+      {% endfor %}
+      {% endif%}
+
+  {% endfor %}
+      </div>
+
+{% endblock content%}
